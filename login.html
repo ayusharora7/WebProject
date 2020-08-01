@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script>
+    function validateform(){  
+      var name=document.myform.username.value;;  
+      var password=document.myform.password.value;  
+  
+        if (name==null || name==""){  
+          alert("Name can't be blank");  
+          return false;  
+      }
+      else if(password.length<9){  
+            alert("Password must be at least 8 characters long.");  
+            return false;  
+        }  
+      }  
+  </script>
+</head>
+<body>
+  <div class="container h-100">
+    <div class="row h-100 justify-content-center align-items-center">
+        <div class="col-10 col-md-8 col-lg-6">
+          <form name="myform" class="form-example"  action="/login" method="POST" onsubmit="return validateform()">
+            <h1>Login</h1>
+            <!-- Input fields -->
+            <div class="form-group">
+              <label for="username">Username:</label>
+              <input type="text" class="form-control username" id="username" placeholder="Username..." name="username">
+            </div>
+            <div class="form-group">
+              <label for="password">Password:</label>
+              <input type="password" class="form-control password" id="password" placeholder="Password..." name="password">
+            </div>
+            <button type="submit" class="btn btn-primary btn-customized">Login</button>
+          </form>
+        </div>
+    </div>
+</div>
+        
+</body>
+</html>
