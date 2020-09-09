@@ -39,12 +39,6 @@ def register():
         email = request.form.get('email')
         password = request.form.get('password')
         account = Table('account', metadata, autoload=True)
-        #password_hash = generate_password_hash(password)
-        #account = Table('account')
-        #account.insert().values(username=username, password=password,email=email)
-        #engine.execute('INSERT INTO "account" ' '(username,password,email)' 'VALUES (username,password,email)')
-        #account = sqlalchemy.Table('account')
-        #user =engine.execute('Select user_id from account where username=username and password=password')
         engine.execute(account.insert(), username=username,email=email, password=password)
         return render_template("register.html")
 
@@ -63,4 +57,11 @@ def login():
             return f"<h1>INVALID LOGIN!</h1>"
 
     return render_template("login.html")
+
+@app.route("/search",methods=["GET","POST"])
+def review():
+    if request.method=="POST":
+        isbn=request.form.get('isbn')
+        res = requests.get("https://www.goodreads.com/book/review_counts.json", params={"key": "gzXpULcIcp3gpfLWDs98w", "isbns": isbn})
+        return jsonify(res.text)
 
